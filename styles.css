@@ -75,6 +75,7 @@ button:focus {
   background: #f9f9f9;
   border: 1px solid #ddd;
   border-radius: 4px;
+  color: black;
 }
 
 #resumeActions {
