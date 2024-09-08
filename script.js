@@ -52,14 +52,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const generatePDF = () => {
         const { jsPDF } = window.jspdf;
         const doc = new jsPDF();
-        // Add resume content
-        doc.setTextColor(0, 0, 0); // Black text color
-        doc.text(resumeContent.innerText, 10, 10);
+        // Center the name at the top with red color
+        doc.setTextColor(255, 0, 0); // Red color
+        doc.setFontSize(20);
+        doc.text(resume.personalInfo.name, doc.internal.pageSize.getWidth() / 2, 20, { align: 'center' });
+        // Draw a line below the name
+        doc.setLineWidth(0.5);
+        doc.line(10, 30, doc.internal.pageSize.getWidth() - 10, 30); // Horizontal line
+        // Display email on the left and phone number on the right
+        doc.setFontSize(12);
+        doc.setTextColor(0, 0, 0); // Black for email and phone
+        doc.text(resume.personalInfo.email, 10, 40); // Left side for email
+        doc.text(resume.personalInfo.phone, doc.internal.pageSize.getWidth() - 10, 40, { align: 'right' }); // Right side for phone
+        // Add the "Education" title in yellow
+        doc.setTextColor(255, 215, 0); // Yellow color
+        doc.setFontSize(16);
+        doc.text("Education", 10, 60);
+        // Add each education entry with proper spacing
+        doc.setTextColor(0, 0, 0); // Black for education details
+        resume.education.forEach((edu, index) => {
+            const offset = 70 + index * 10;
+            doc.text(`${edu.institution} - ${edu.degree} (${edu.year})`, 10, offset);
+        });
+        // Add the "Work Experience" title in red
+        doc.setTextColor(255, 0, 0); // Red color
+        doc.setFontSize(16);
+        doc.text("Work Experience", 10, 90 + resume.education.length * 10);
+        // Add each work experience entry with proper spacing
+        doc.setTextColor(0, 0, 0); // Black for work experience details
+        resume.workExperience.forEach((work, index) => {
+            const offset = 100 + resume.education.length * 10 + index * 10;
+            doc.text(`${work.company} - ${work.role} (${work.duration})`, 10, offset);
+        });
+        // Add the "Skills" title in red
+        doc.setTextColor(255, 0, 0); // Red color
+        doc.setFontSize(16);
+        const skillsOffset = 110 + resume.education.length * 10 + resume.workExperience.length * 10;
+        doc.text("Skills", 10, skillsOffset);
+        // Add each skill with proper spacing
+        doc.setTextColor(0, 0, 0); // Black for skills
+        resume.skills.forEach((skill, index) => {
+            doc.text(skill, 10, skillsOffset + 10 + index * 10);
+        });
+        // Save the PDF
         doc.save('resume.pdf');
     };
     // Function to generate a shareable link
     const generateShareableLink = () => {
-        // Example of generating a shareable link (you'll need to implement a real one)
         const link = `https://example.com/share?resumeId=${encodeURIComponent('unique_resume_id')}`;
         return link;
     };
@@ -72,7 +111,7 @@ document.addEventListener('DOMContentLoaded', () => {
       <h4>Education</h4>
       <ul>${resume.education.map(e => `<li>${e.institution} - ${e.degree} (${e.year})</li>`).join('')}</ul>
       <h4>Work Experience</h4>
-      <ul>${resume.workExperience.map(w => `<li>${w.company} - ${w.role} (${w.duration})</li>`).join('')}</ul>
+      <ul>${resume.workExperience.map(w => `<li>${w.company} - ${w.role} (${w.duration})}</li>`).join('')}</ul>
       <h4>Skills</h4>
       <ul>${resume.skills.map(s => `<li>${s}</li>`).join('')}</ul>
     `;
@@ -116,49 +155,16 @@ document.addEventListener('DOMContentLoaded', () => {
         document.getElementById('name').value = resume.personalInfo.name;
         document.getElementById('email').value = resume.personalInfo.email;
         document.getElementById('phone').value = resume.personalInfo.phone;
-        const educationFields = document.getElementById('educationFields');
-        educationFields.innerHTML = '';
-        resume.education.forEach(e => {
-            const newEducation = document.createElement('div');
-            newEducation.classList.add('education');
-            newEducation.innerHTML = `
-        <input type="text" class="institution" value="${e.institution}" placeholder="Institution" required>
-        <input type="text" class="degree" value="${e.degree}" placeholder="Degree" required>
-        <input type="text" class="year" value="${e.year}" placeholder="Year" required>
-      `;
-            educationFields.appendChild(newEducation);
-        });
-        const workExperienceFields = document.getElementById('workExperienceFields');
-        workExperienceFields.innerHTML = '';
-        resume.workExperience.forEach(w => {
-            const newWorkExperience = document.createElement('div');
-            newWorkExperience.classList.add('workExperience');
-            newWorkExperience.innerHTML = `
-        <input type="text" class="company" value="${w.company}" placeholder="Company" required>
-        <input type="text" class="role" value="${w.role}" placeholder="Role" required>
-        <input type="text" class="duration" value="${w.duration}" placeholder="Duration" required>
-      `;
-            workExperienceFields.appendChild(newWorkExperience);
-        });
-        const skillsFields = document.getElementById('skillsFields');
-        skillsFields.innerHTML = '';
-        resume.skills.forEach(s => {
-            const newSkill = document.createElement('input');
-            newSkill.classList.add('skill');
-            newSkill.type = 'text';
-            newSkill.value = s;
-            newSkill.placeholder = 'Skill';
-            newSkill.required = true;
-            skillsFields.appendChild(newSkill);
-        });
+        // Show the form for editing
         resumeForm.style.display = 'block';
         resumePreview.style.display = 'none';
         resumeActions.style.display = 'none';
-        isEditing = true;
     });
+    // Handle Download button click
     downloadButton.addEventListener('click', generatePDF);
+    // Handle Share button click
     shareButton.addEventListener('click', () => {
-        const link = generateShareableLink();
-        window.prompt("Copy this link to share your resume:", link);
+        const shareableLink = generateShareableLink();
+        alert(`Shareable link: ${shareableLink}`);
     });
 });
