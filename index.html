@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Resume Builder</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Resume Builder</h1>
+    </header>
+
+    <form id="resumeForm">
+      <section id="personalInfo">
+        <h2>Personal Info</h2>
+        <input type="text" id="name" name="name" placeholder="Name" required>
+        <input type="email" id="email" name="email" placeholder="Email" required>
+        <input type="tel" id="phone" name="phone" placeholder="Phone">
+      </section>
+
+      <section id="education">
+        <h2>Education</h2>
+        <div id="educationFields">
+          <div class="education">
+            <input type="text" class="institution" placeholder="Institution" required>
+            <input type="text" class="degree" placeholder="Degree" required>
+            <input type="text" class="year" placeholder="Year" required>
+          </div>
+        </div>
+        <button type="button" id="addEducation">Add Education</button>
+      </section>
+
+      <section id="workExperience">
+        <h2>Work Experience</h2>
+        <div id="workExperienceFields">
+          <div class="workExperience">
+            <input type="text" class="company" placeholder="Company" required>
+            <input type="text" class="role" placeholder="Role" required>
+            <input type="text" class="duration" placeholder="Duration" required>
+          </div>
+        </div>
+        <button type="button" id="addWorkExperience">Add Work Experience</button>
+      </section>
+
+      <section id="skills">
+        <h2>Skills</h2>
+        <div id="skillsFields">
+          <input type="text" class="skill" placeholder="Skill" required>
+        </div>
+        <button type="button" id="addSkill">Add Skill</button>
+      </section>
+
+      <button type="submit">Generate Resume</button>
+    </form>
+
+    <div id="resumePreview" style="display: none;">
+      <h2>Resume Preview</h2>
+      <div id="resumeContent"></div>
+      <div id="resumeActions" style="display: none;">
+        <button id="editButton">Edit Resume</button>
+        <button id="downloadButton">Download Resume</button>
+        <button id="shareButton" style="margin-left: 5px;">Share Resume</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
