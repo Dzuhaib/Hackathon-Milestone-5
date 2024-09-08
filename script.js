@@ -74,8 +74,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const offset = 70 + index * 10;
             doc.text(`${edu.institution} - ${edu.degree} (${edu.year})`, 10, offset);
         });
-        // Add the "Work Experience" title in red
-        doc.setTextColor(255, 0, 0); // Red color
+        // Add the "Work Experience" title in Yellow
+        doc.setTextColor(255, 215, 0); // Yellow color
         doc.setFontSize(16);
         doc.text("Work Experience", 10, 90 + resume.education.length * 10);
         // Add each work experience entry with proper spacing
@@ -85,7 +85,7 @@ document.addEventListener('DOMContentLoaded', () => {
             doc.text(`${work.company} - ${work.role} (${work.duration})`, 10, offset);
         });
         // Add the "Skills" title in red
-        doc.setTextColor(255, 0, 0); // Red color
+        doc.setTextColor(255, 215, 0); // Yellow color
         doc.setFontSize(16);
         const skillsOffset = 110 + resume.education.length * 10 + resume.workExperience.length * 10;
         doc.text("Skills", 10, skillsOffset);
