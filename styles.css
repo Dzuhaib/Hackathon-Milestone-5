@@ -2,12 +2,12 @@ body {
   font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #000; /* Black background */
+  background-color: #000; 
   color: #fff;
 }
 
 h1 {
-  color: #FFD700; /* Yellow */
+  color: #FFD700; 
   text-align: center;
   margin-top: 50px;
 }
@@ -20,12 +20,12 @@ h1 {
   padding: 20px;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  margin-top: 30px; /* Space from top */
+  margin-top: 30px; 
 }
 
 h2 {
   margin-top: 20px;
-  color: #FFD700; /* Yellow */
+  color: #FFD700; 
 }
 
 form {
@@ -42,15 +42,15 @@ input {
 }
 
 input:focus {
-  border-color: #FFD700; /* Yellow */
+  border-color: #FFD700; 
   outline: none;
 }
 
 button {
   padding: 10px;
   border: none;
-  background-color: #FFD700; /* Yellow */
-  color: #000; /* Black text color */
+  background-color: #FFD700; 
+  color: #000;
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
@@ -58,7 +58,7 @@ button {
 }
 
 button:hover {
-  background-color: #FFC107; /* Dark Yellow */
+  background-color: #FFC107; 
   transform: scale(1.05);
 }
 
@@ -85,8 +85,8 @@ button:focus {
 #downloadButton, #shareButton {
   padding: 10px;
   border: none;
-  background-color: #FFD700; /* Yellow */
-  color: #000; /* Black text color */
+  background-color: #FFD700; 
+  color: #000; 
   border-radius: 4px;
   cursor: pointer;
   margin-top: 10px;
@@ -94,7 +94,7 @@ button:focus {
 }
 
 #downloadButton:hover, #shareButton:hover {
-  background-color: #FFC107; /* Dark Yellow */
+  background-color: #FFC107; 
   transform: scale(1.05);
 }
 
